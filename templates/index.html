@@ -7,17 +7,47 @@
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
-    <div id="center-container">
-        <h1>Tic Tac Toe</h1>
-        <div id="board">
-            {% for i in range(9) %}
-                <div class="cell" data-position="{{ i }}" onclick="makeMove(this)">{{ board[i] }}</div>
-            {% endfor %}
+    <div id="master-container">
+        <div id="Secondery-container">
+            <div id="center-container">
+                <h1>Tic Tac Toe</h1>
+                <div id="board">
+                    {% for i in range(9) %}
+                        <div class="cell" data-position="{{ i }}" onclick="makeMove(this)">
+                            <div class="tile">{{ board[i] }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- <h2 id="result"></h2> -->
+                <!-- <button id="restart-button" onclick="restartGame()">Restart Game</button> -->
+                <!-- <h3 id="current_player">Current Player: {{ current_player }}</h3> -->
+                <!-- <button id="restart-button" onclick="restartGame()">Restart Game</button> -->
+            </div>
         </div>
-        <h2 id="current_player">Current Player: {{ current_player }}</h2>
-        <h2 id="result"></h2>
-        <button id="restart-button" onclick="restartGame()">Restart Game</button>
+        <div id="Primary-container">
+            <div id="result-container">
+                <button id="restart-button" onclick="restartGame()">Restart Game</button>
+                <h2 id="result"></h2>
+                <h3 id="current_player">Current Player: {{ current_player }}</h3>
+            </div>
+            <div id="game-container">
+                <a href="https://github.com/Teebra/Tic-Tac-Toe-Game" class="box" target="_blank">
+                    <img src="https://user-images.githubusercontent.com/125788246/260238860-164ade38-fccc-466e-a809-c08c93509c79.svg" alt="GitHub Repo">
+                    <!-- <p>GitHub</p> -->
+                </a>
+                <a href="https://hub.docker.com/r/teebro/tic-tac-toe-game/tags" class="box" target="_blank">
+                    <img src="https://www.underworldcode.org/content/images/2020/08/Moby-logo-1.png" alt="Dockerhub Image">
+                    <!-- <p>Dockerhub</p> -->
+                </a>
+            </div>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+
+
+
+
+
+

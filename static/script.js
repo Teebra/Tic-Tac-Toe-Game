@@ -20,17 +20,18 @@ function makeMove(cell) {
 function updateBoard(board) {
     const cells = document.querySelectorAll(".cell");
     for (let i = 0; i < board.length; i++) {
-        cells[i].innerText = board[i];
+        cells[i].querySelector(".tile").innerText = board[i];
     }
 }
 
 function updateCurrentPlayer(currentPlayer) {
-    document.querySelector("h2#current_player").innerText = `Current Player: ${currentPlayer}`;
+    document.querySelector("h3#current_player").innerText = `Current Player: ${currentPlayer}`;
 }
 
 function showResult() {
     const resultElement = document.querySelector("h2#result");
     resultElement.innerText = "Game Over";
+    setTimeout(restartGame, 3000);  // Restart the game after 5 seconds
 }
 
 function restartGame() {

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 import random
+import time
 
 app = Flask(__name__)
 
@@ -64,10 +65,9 @@ def make_move():
     updated_board = player_move(position)  # Update the board and get the updated version
     return jsonify({"board": updated_board, "current_player": current_player, "game_over": is_game_over()})
 
-
-
 @app.route("/restart", methods=["POST"])
 def restart():
+    # time.sleep(5)  # Wait for 5 seconds before restarting the game
     restart_game()
     return jsonify({"board": board, "current_player": current_player, "game_over": is_game_over()})
 
