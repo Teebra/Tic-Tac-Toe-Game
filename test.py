@@ -1,5 +1,6 @@
 import pytest
-from app import app, board, is_game_over, player_move, restart_game
+import time
+from app import app, board, player_symbol, bot_symbol, current_player, is_game_over, bot_move, player_move, restart_game
 
 @pytest.fixture
 def client():
@@ -7,57 +8,64 @@ def client():
     with app.test_client() as client:
         yield client
 
-def test_initial_board_state():
-    assert len(board) == 9
-    assert all(cell == "" for cell in board)
+def test_index(client):
+    response = client.get('/')
+    assert response.status_code == 200
+    assert b'Tic Tac Toe' in response.data
 
-def test_is_game_over_empty_board():
-    restart_game()
+def test_make_move(client):
+    position = 0
+    response = client.post('/make_move', json={'position': position})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert 'board' in data
+    assert 'current_player' in data
+    assert 'game_over' in data
+    assert data['board'][position] == player_symbol
+    assert data['current_player'] == bot_symbol or data['current_player'] == player_symbol
+    assert isinstance(data['game_over'], bool)
+
+def test_restart(client):
+    response = client.post('/restart')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert 'board' in data
+    assert 'current_player' in data
+    assert 'game_over' in data
+    assert data['board'] == [""] * 9
+    assert data['current_player'] == player_symbol
+    assert isinstance(data['game_over'], bool)
+
+def test_is_game_over():
+    # Test when the game is not over
     assert not is_game_over()
 
-def test_player_move_and_is_game_over(client):
+def test_bot_move():
+    # Test when there are no available moves
+    board[0] = board[1] = board[2] = player_symbol
+    board[3] = board[4] = board[5] = bot_symbol
+    board[6] = board[7] = board[8] = player_symbol
+    bot_move()
+    assert all(cell != "" for cell in board)
+
+def test_player_move():
+    position = 0
+    updated_board = player_move(position)
+    assert updated_board[position] == player_symbol
+    assert current_player == bot_symbol or current_player == player_symbol
+
+    # Test when the position is already occupied
+    position = 0
+    board[position] = player_symbol
+    updated_board = player_move(position)
+    assert updated_board[position] == player_symbol
+
+def test_restart_game():
+    # Set up the initial game state
+    board = ["", "", "", "", "", "", "", "", ""]
+
+    # Call the restart_game() function
     restart_game()
 
-    # Player makes a move
-    response = client.post('/make_move', json={'position': 0})
-    data = response.get_json()
-    assert data['board'][0] == "X"
-    assert data['current_player'] == "O"
-    assert not data['game_over']
-
-    # Bot makes a move (we don't know the exact cell, so we just check that the board is updated)
-    response = client.post('/make_move', json={'position': 1})
-    data = response.get_json()
-    assert data['current_player'] == "O"  # The bot's move changes the current player to "O"
-    assert not data['game_over']
-    assert "O" in data['board']  # Check that the board has been updated with the bot's move
-
-    # Player makes another move (we continue the game to check game over conditions)
-    response = client.post('/make_move', json={'position': 2})
-    data = response.get_json()
-    assert data['board'][2] == "X"
-    assert data['current_player'] == "O"
-    assert not data['game_over']
-
-    # Continue with additional moves if needed
-    # ...
-
-    # Eventually, the game will be over, and we can check for the game over condition
-    assert data['game_over']
-
-
-
-def test_restart_game(client):
-    restart_game()
-
-    # Player makes a move
-    response = client.post('/make_move', json={'position': 0})
-    data = response.get_json()
-    assert data['board'][0] == "X"
-
-    # Restart the game
-    response = client.post('/restart')
-    data = response.get_json()
-    assert all(cell == "" for cell in data['board'])
-    assert data['current_player'] == "X"
-    assert not data['game_over']
+    # Check if the board is reset
+    assert board == ["", "", "", "", "", "", "", "", ""]

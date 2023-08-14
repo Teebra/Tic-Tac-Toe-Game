@@ -67,7 +67,6 @@ def make_move():
 
 @app.route("/restart", methods=["POST"])
 def restart():
-    # time.sleep(5)  # Wait for 5 seconds before restarting the game
     restart_game()
     return jsonify({"board": board, "current_player": current_player, "game_over": is_game_over()})
 
