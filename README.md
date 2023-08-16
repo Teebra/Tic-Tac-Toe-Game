@@ -7,7 +7,7 @@ docker pull teebro/tic-tac-toe-game:53
 ```
 Run
 ```
-docker run tic-tac-toe-game:53
+docker run teebro/tic-tac-toe-game:53
 ```
 Access Port 8000
 ```
