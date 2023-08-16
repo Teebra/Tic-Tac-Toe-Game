@@ -9,6 +9,11 @@ Run
 ```
 docker run teebro/tic-tac-toe-game:53
 ```
+Acess port 8000 
+```
+http://localhost:8000
+```
+or [click here](http://localhost:8000)
 
 or [click here after run](http://localhost:8080)
 
