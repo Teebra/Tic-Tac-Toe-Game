@@ -18,6 +18,12 @@ http://localhost:8000
 
 or [click here](http://localhost:8000) after run!
 
+
+Pytest
+```
+pytest -v test.py
+```
+
 ![Screenshot from 2023-08-16 23-28-10](https://github.com/Teebra/Tic-Tac-Toe-Game/assets/125788246/bbb98626-0a60-4056-8de9-d920903d0b4c)
 
 ![Screenshot from 2023-08-16 23-28-34](https://github.com/Teebra/Tic-Tac-Toe-Game/assets/125788246/d3058135-7175-408b-a664-6ac7358c882a)
