@@ -16,7 +16,7 @@ Acess port 8000
 http://localhost:8000
 ```
 
-or [click here](http://localhost:8000)
+or [click here](http://localhost:8000) after run!
 
 
 ![Screenshot from 2023-08-11 20-40-57](https://github.com/Teebra/Tic-Tac-Toe-Game/assets/125788246/de93b197-6bc0-47dc-8aac-69d349d61517)
