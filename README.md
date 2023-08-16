@@ -2,7 +2,6 @@
 ## The most difficult tic tac toe game ever!
 
 [DockerHub](https://hub.docker.com/r/teebro/tic-tac-toe-game/tags)
-[DockerHub](https://hub.docker.com/r/teebro/tic-tac-toe-game/tags){:target="_blank"}
 ```
 docker pull teebro/tic-tac-toe-game:53
 ```
