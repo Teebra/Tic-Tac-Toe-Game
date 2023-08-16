@@ -3,7 +3,15 @@
 
 [DockerHub](https://hub.docker.com/r/teebro/tic-tac-toe-game/tags)
 ```
-docker pull teebro/tic-tac-toe-game:v1
+docker pull teebro/tic-tac-toe-game:53
+```
+Run
+```
+docker run tic-tac-toe-game:53
+```
+Access Port 8000
+```
+http://localhost:8080
 ```
 
 ![Screenshot from 2023-08-11 20-40-57](https://github.com/Teebra/Tic-Tac-Toe-Game/assets/125788246/de93b197-6bc0-47dc-8aac-69d349d61517)
