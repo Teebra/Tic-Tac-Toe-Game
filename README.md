@@ -19,7 +19,7 @@ http://localhost:8000
 or [click here](http://localhost:8000) after run!
 
 
-Pytest
+Run Pytest
 ```
 pytest -v test.py
 ```
