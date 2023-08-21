@@ -11,12 +11,12 @@ Run
 docker run teebro/tic-tac-toe-game:53
 ```
 
-Acess port 8000 
+Acess port 5000 
 ```
-http://localhost:8000
+http://localhost:5000
 ```
 
-or [click here](http://localhost:8000) after run!
+or [click here](http://localhost:5000) after run!
 
 
 Run Pytest
