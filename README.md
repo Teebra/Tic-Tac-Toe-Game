@@ -3,12 +3,12 @@
 
 [DockerHub](https://hub.docker.com/r/teebro/tic-tac-toe-game/tags)
 ```
-docker pull teebro/tic-tac-toe-game:53
+docker pull teebro/tic-tac-toe-game:55
 ```
 
 Run
 ```
-docker run teebro/tic-tac-toe-game:53
+docker run teebro/tic-tac-toe-game:55
 ```
 
 Acess port 5000 
