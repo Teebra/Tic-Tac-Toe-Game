@@ -34,4 +34,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest -v test.py  
+        pytest -v test.py
+    - name: Execute generator script
+      run: |
+        python app.py
