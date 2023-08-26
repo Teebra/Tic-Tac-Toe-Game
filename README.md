@@ -1,7 +1,7 @@
 # Tic-Tac-Toe-Game
 ## The most difficult tic tac toe game ever!
 
-![example workflow](https://github.com/Teebra/Tic-Tac-Toe-Game/actions/workflows/python-app.yml/badge.svg)
+![Build status](https://github.com/Teebra/Tic-Tac-Toe-Game/actions/workflows/python-app.yml/badge.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Teebra/Tic-Tac-Toe-Game/blob/main/LICENSE)
 
 [DockerHub](https://hub.docker.com/r/teebro/tic-tac-toe-game/tags)
