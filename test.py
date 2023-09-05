@@ -79,4 +79,4 @@ def test_restart_game():
     restart_game()
 
     # Check if the board is reset
-    assert board == ["", "", "", "", "", "", "", "", ""]
+    assert board == ["", "", "", "", "", "", "", "", #""]
