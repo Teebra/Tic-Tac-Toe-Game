@@ -73,7 +73,7 @@ def test_player_move():
 
 def test_restart_game():
     # Set up the initial game state
-    board = ["", "", "", "", "", "", "", "", ""]
+    board = ["", "", "", "", "", "", "", "", #""]
 
     # Call the restart_game() function
     restart_game()
