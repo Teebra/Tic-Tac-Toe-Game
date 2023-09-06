@@ -42,16 +42,20 @@ jobs:
   check_workflow_status:
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ always() }} # This ensures the job always runs but might not produce an outcome
     steps:
       - name: Set Workflow Status
         id: set_workflow_status
-        run: echo "::set-output name=workflow_status::${{ env.WORKFLOW_STATUS }}"
+        run: |
+          if [ ${{ failure() }} == "true" ]; then
+            echo "::set-env name=WORKFLOW_STATUS::failure"
+          else
+            echo "::set-env name=WORKFLOW_STATUS::success"
+          fi
 
   trigger_monitoring:
     runs-on: ubuntu-latest
     needs: check_workflow_status
-    if: ${{ needs.check_workflow_status.outputs.workflow_status == 'failure' }}
+    if: ${{ env.WORKFLOW_STATUS == 'failure' }}
     steps:
       - name: Trigger Monitoring Workflow
         uses: actions/github-script@v5
