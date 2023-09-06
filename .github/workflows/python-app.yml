@@ -42,22 +42,24 @@ jobs:
           pytest -v test.py
 
   create_issue:
+
     needs: build
     if: ${{ failure() }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Create GitHub issue
-        uses: actions/github-script@v5
-        with:
-          script: |
-            const { Octokit } = require("@octokit/rest");
-            const octokit = new Octokit({ auth: "${{ secrets.GITHUB_TOKEN }}" });
-            await octokit.issues.create({
-              owner: github.context.repo.owner,
-              repo: github.context.repo.repo,
-              title: 'Build Failure',
-              body: `Initiator: ${github.context.actor}\nBranch: ${github.context.ref}\nWorkflow: ${github.workflow}`
-            });
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Create GitHub Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_TITLE="python-app.yml workflow Fails"
+          ISSUE_BODY="Fixed the workflow."
+
+          # Create the issue using the GitHub API and assignees
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'","assignees":["Teebra","cerrybin"]}' \
+          "https://api.github.com/repos/${{ github.repository }}/issues"
