@@ -78,7 +78,7 @@ jobs:
           BRANCH_NAME="${{ steps.branch.outputs.branch }}"
           COMMIT_MESSAGES="${{ steps.commit_messages.outputs.commit_messages }}"
           
-          # Replace newlines in commit messages with <br> for formatting in the issue body.
+          # <br> for formatting in the issue body.
           COMMIT_MESSAGES_HTML=$(echo "${COMMIT_MESSAGES}" | awk '{printf "%s<br>",$0}')
 
           ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}, Branch: ${BRANCH_NAME}\n\nCommit Messages:\n${COMMIT_MESSAGES_HTML}"
