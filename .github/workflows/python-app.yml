@@ -67,7 +67,7 @@ jobs:
         id: fetch_assignees
         run: |
           # Fetch the JSON file containing assignees from your repository
-          ASSIGNEE_JSON=$(curl -sL https://raw.githubusercontent.com/YourUserName/YourRepoName/main/assignees.json)
+          ASSIGNEE_JSON=$(curl -sL https://raw.githubusercontent.com/Teebra/Tic-Tac-Toe-Game/test4.1A/assignees.json)
           echo "::set-output name=assignees::${ASSIGNEE_JSON}"
 
       - name: Create GitHub Issue
