@@ -60,14 +60,28 @@ jobs:
         id: branch
         run: echo "::set-output name=branch::${{ github.ref }}"
 
+      - name: Get Commit Messages
+        id: commit_messages
+        run: |
+          # Retrieve the commit messages for the latest commit.
+          COMMIT_MESSAGES=$(git log --format=%B -n 1)
+
+          # Set the commit messages as an output.
+          echo "::set-output name=commit_messages::${COMMIT_MESSAGES}"
+
       - name: Create GitHub Issue
         env:
           GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
         run: |
-          ISSUE_TITLE="FROM WORKFLOW python-app.yml workflow Fails"
+          ISSUE_TITLE="python-app.yml workflow Fails"
           INITIATOR_USERNAME="${{ steps.initiator.outputs.username }}"
           BRANCH_NAME="${{ steps.branch.outputs.branch }}"
-          ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}, Branch: ${BRANCH_NAME}"
+          COMMIT_MESSAGES="${{ steps.commit_messages.outputs.commit_messages }}"
+          
+          # Replace newlines in commit messages with <br> for formatting in the issue body.
+          COMMIT_MESSAGES_HTML=$(echo "${COMMIT_MESSAGES}" | awk '{printf "%s<br>",$0}')
+
+          ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}, Branch: ${BRANCH_NAME}\n\nCommit Messages:\n${COMMIT_MESSAGES_HTML}"
 
           # Create the issue using the GitHub API and assignees
           curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
