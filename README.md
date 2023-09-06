@@ -1,4 +1,4 @@
-# Tic-Tac-Toe-Game 
+# Tic-Tac-Toe-Game
 ## The most difficult tic tac toe game ever!
 
 ![Build status](https://github.com/Teebra/Tic-Tac-Toe-Game/actions/workflows/python-app.yml/badge.svg)
