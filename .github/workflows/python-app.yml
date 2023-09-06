@@ -46,17 +46,10 @@ jobs:
             echo "Tests passed, setting workflow status to success"
           fi
 
-  check_workflow_status:
+  trigger_monitoring:
     runs-on: ubuntu-latest
     needs: build
     if: failure()
-    steps:
-      - name: Set Workflow Status
-        run: echo "Workflow status is failure"
-
-  trigger_monitoring:
-    runs-on: ubuntu-latest
-    needs: check_workflow_status
     steps:
       - name: Trigger Monitoring Workflow
         uses: actions/github-script@v5
