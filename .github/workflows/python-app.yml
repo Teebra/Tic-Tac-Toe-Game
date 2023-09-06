@@ -54,7 +54,7 @@ jobs:
 
       - name: Create GitHub Issue
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
         run: |
           ISSUE_TITLE="python-app.yml workflow Fails"
           ISSUE_BODY="Fixed the workflow."
