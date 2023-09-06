@@ -1,35 +1,40 @@
-name: Monitor and Create Issue on Workflow Failure
+name: Monitor Workflows and Create Issues
 
 on:
   workflow_run:
-    workflows: ["python-app.yml"]
+    workflows: ["docker-image.yml", "python-app.yml"]
     types:
       - completed
 
 jobs:
-  check_and_create_issue:
+  monitor_and_create_issue:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check Workflow Status
         id: check_status
-        run: echo "Workflow status is ${{ github.event.workflow_run.conclusion }}"
-      
-      - name: Create Issue
-        if: ${{ steps.check_status.outputs.check_status != 'success' }}
-        uses: actions/github-script@v5
-        with:
-          script: |
-            const branchName = github.event.workflow_run.head_ref;
-            const initiator = github.event.workflow_run.actor;
+        run: echo "::set-output name=workflow_status::${{ github.event.workflow_run.conclusion }}"
 
-            const issueTitle = `Failure in ${branchName} initiated by ${initiator}`;
-            const issueBody = `The workflow 'python-app.yml' failed in branch ${branchName}.`;
-            
-            const octokit = new github.GitHub(github.token);
-            await octokit.issues.create({
-              owner: github.context.repo.owner,
-              repo: github.context.repo.repo,
-              title: issueTitle,
-              body: issueBody,
-              assignees: ["Teebra", "cerrybin"] // Assign the issue to specific users
-            });
+      - name: Get Repository Name
+        id: repo_name
+        run: echo "::set-output name=repo_name::${{ github.repository }}"
+
+      - name: Get Initiator Username
+        id: initiator
+        run: echo "::set-output name=username::${{ github.actor }}"
+
+      - name: Create Issue on Workflow Failure
+        if: steps.check_status.outputs.workflow_status == 'failure'
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
+        run: |
+          WORKFLOW_NAME="${{ github.event.workflow_run.workflow }}"
+          REPO_NAME="${{ steps.repo_name.outputs.repo_name }}"
+          INITIATOR_USERNAME="${{ steps.initiator.outputs.username }}"
+          ISSUE_TITLE="Workflow '${WORKFLOW_NAME}'"
+          ISSUE_BODY="The workflow '${WORKFLOW_NAME}' has failed in the repository '${REPO_NAME}'\n\nInitiator: @${INITIATOR_USERNAME}"
+
+          # Create the issue using the GitHub API
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'"}' \
+          "https://api.github.com/repos/${REPO_NAME}/issues"
