@@ -73,7 +73,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
         run: |
-          ISSUE_TITLE="python-app.yml workflow Fails"
+          ISSUE_TITLE="FROM WORKFLOW  python-app.yml workflow Fails"
           INITIATOR_USERNAME="${{ steps.initiator.outputs.username }}"
           BRANCH_NAME="${{ steps.branch.outputs.branch }}"
           COMMIT_MESSAGES="${{ steps.commit_messages.outputs.commit_messages }}"
