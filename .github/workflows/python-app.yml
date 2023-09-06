@@ -48,13 +48,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    create_issue:
-
-    needs: build
-    if: ${{ failure() }}
-
-    runs-on: ubuntu-latest
-
     steps:
       - name: Check out code
         uses: actions/checkout@v2
