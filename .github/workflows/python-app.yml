@@ -54,33 +54,27 @@ jobs:
               ref: github.context.sha
             });
 
-  check_and_create_issue:
-
-    needs: build
-    if: ${{ needs.build.result == 'failure' }}
-    
+  create_issue:
     runs-on: ubuntu-latest
+    needs: build
+    if: ${{ failure() }}
+
     steps:
-      - name: Check Workflow Status
-        id: check_status
-        run: echo "Workflow status is ${{ github.event.workflow_run.conclusion }}"
-      
       - name: Create Issue
-        if: ${{ steps.check_status.outputs.check_status != 'success' }}
-        uses: actions/github-script@v5
+        uses: actions/github-script@v3
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const branchName = github.event.workflow_run.head_ref;
-            const initiator = github.event.workflow_run.actor;
+            const branchName = github.context.payload.pull_request.head.ref;
+            const initiator = github.context.payload.pull_request.user.login;
 
             const issueTitle = `Failure in ${branchName} initiated by ${initiator}`;
             const issueBody = `The workflow 'python-app.yml' failed in branch ${branchName}.`;
-            
-            const octokit = new github.GitHub(github.token);
-            await octokit.issues.create({
+
+            await github.issues.create({
               owner: github.context.repo.owner,
               repo: github.context.repo.repo,
               title: issueTitle,
               body: issueBody,
-              assignees: ["Teebra", "cerrybin"] // Assign the issue to specific users
+              assignees: ["Teebra", "cerrybin"]
             });
