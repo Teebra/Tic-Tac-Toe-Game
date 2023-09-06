@@ -55,7 +55,7 @@ jobs:
             })
 
   create_issue:
-    needs: build
+    if: ${{ failure() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
