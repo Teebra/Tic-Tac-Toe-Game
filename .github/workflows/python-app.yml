@@ -61,5 +61,5 @@ jobs:
 
           # Create the issue using the GitHub API and assignees
           curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-          -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'","assignees":["Teebra","cerrybin"]}' \
+          -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'","assignees":["Teebra","cerrybin","pinlom"]}' \
           "https://api.github.com/repos/${{ github.repository }}/issues"
