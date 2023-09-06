@@ -66,10 +66,10 @@ jobs:
           COMMIT_MESSAGES=$(git log --format=%B -n 1)
           echo "::set-output name=commit_messages::${COMMIT_MESSAGES}"
 
-      - name: Fetch Assignees from JSON
+      - name: Fetch Assignees from JSON in Repo
         id: fetch_assignees
         run: |
-          # Fetch the JSON file containing assignees from your repository
+          # Read the contents of the assignees.json file from the repository
           ASSIGNEE_JSON=$(cat assignees.json)
           echo "::set-output name=assignees::${ASSIGNEE_JSON}"
 
