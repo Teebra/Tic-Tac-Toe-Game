@@ -52,14 +52,19 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      - name: Get Initiator Username
+        id: initiator
+        run: echo "::set-output name=username::${{ github.actor }}"
+
       - name: Create GitHub Issue
         env:
           GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
         run: |
           ISSUE_TITLE="python-app.yml workflow Fails"
-          ISSUE_BODY="Fixed the workflow."
+          INITIATOR_USERNAME="${{ steps.initiator.outputs.username }}"
+          ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}"
 
           # Create the issue using the GitHub API and assignees
           curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
           -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'","assignees":["Teebra","cerrybin","pinlom"]}' \
-          "https://api.github.com/repos/${{ github.repository }}/issues"
+          "https://api.github.com/repos/Teebra/Tic-Tac-Toe-Game/issues"
