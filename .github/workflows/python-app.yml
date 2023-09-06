@@ -56,13 +56,18 @@ jobs:
         id: initiator
         run: echo "::set-output name=username::${{ github.actor }}"
 
+      - name: Get Branch Name
+        id: branch
+        run: echo "::set-output name=branch::${{ github.ref }}"
+
       - name: Create GitHub Issue
         env:
           GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
         run: |
           ISSUE_TITLE="python-app.yml workflow Fails"
           INITIATOR_USERNAME="${{ steps.initiator.outputs.username }}"
-          ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}"
+          BRANCH_NAME="${{ steps.branch.outputs.branch }}"
+          ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}, Branch: ${BRANCH_NAME}"
 
           # Create the issue using the GitHub API and assignees
           curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
