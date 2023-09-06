@@ -48,7 +48,7 @@ jobs:
 
   trigger_monitoring:
     runs-on: ubuntu-latest
-    needs: check_workflow_status
+    needs: build
     if: failure()
     steps:
       - name: Set up Node.js
