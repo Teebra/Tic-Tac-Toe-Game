@@ -53,8 +53,9 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const octokit = new github.GitHub('${{ secrets.GITHUB_TOKEN }}');
-            await octokit.issues.create({
+            const { Octokit } = require("@octokit/core");
+            const octokit = new Octokit({ auth: "${{ secrets.GITHUB_TOKEN }}" });
+            await octokit.request("POST /repos/{owner}/{repo}/issues", {
               owner: github.context.repo.owner,
               repo: github.context.repo.repo,
               title: 'Build Failure',
