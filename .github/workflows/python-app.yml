@@ -1,5 +1,3 @@
-# python-app.yml
-
 name: Python package
 
 on:
@@ -37,7 +35,7 @@ jobs:
         run: |
           if ! pytest -v test.py; then
             echo "Tests failed, setting workflow status to failure"
-            echo "::set-output name=workflow_status::failure"
+            echo "::set-env name=WORKFLOW_STATUS::failure"
       
   check_workflow_status:
     runs-on: ubuntu-latest
