@@ -15,7 +15,7 @@ jobs:
         run: echo "Workflow status is ${{ github.event.workflow_run.conclusion }}"
       
       - name: Create Issue
-        if: ${{ steps.check_status.outputs.check_status != 'success' }}
+        if: ${{ steps.check_status.outputs.check_status == 'failure' }}
         uses: actions/github-script@v5
         with:
           script: |
