@@ -1,4 +1,4 @@
-name: Python Package Build
+name: Python package
 
 on:
   pull_request:
@@ -18,10 +18,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -32,27 +32,31 @@ jobs:
 
       - name: Lint with flake8
         run: |
+          # Stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Test with pytest
         run: |
           pytest -v test.py
 
-      - name: Create GitHub issue on failure
-        if: failure()
+  create_issue:
+    needs: build
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create GitHub issue
         uses: actions/github-script@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issueTitle = "Build Failure - ${{ github.workflow }}";
-            const issueBody = `Initiator: ${{ github.actor }}
-Branch Name: ${github.ref}
-Workflow Name: ${github.workflow}`;
-
-            await github.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: issueTitle,
-              body: issueBody,
+            const octokit = new github.GitHub('${{ secrets.GITHUB_TOKEN }}');
+            await octokit.issues.create({
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo,
+              title: 'Build Failure',
+              body: `Initiator: ${github.context.actor}\nBranch: ${github.context.ref}\nWorkflow: ${github.workflow}`
             });
