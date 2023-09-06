@@ -43,9 +43,6 @@ jobs:
 
   create_issue:
 
-    needs: build
-    if: ${{ failure() }}
-
     runs-on: ubuntu-latest
 
     steps:
@@ -63,27 +60,43 @@ jobs:
       - name: Get Commit Messages
         id: commit_messages
         run: |
-          # Retrieve the commit messages for the latest commit.
           COMMIT_MESSAGES=$(git log --format=%B -n 1)
-
-          # Set the commit messages as an output.
           echo "::set-output name=commit_messages::${COMMIT_MESSAGES}"
+
+      - name: Fetch Assignees from JSON
+        id: fetch_assignees
+        run: |
+          # Fetch the JSON file containing assignees from your repository
+          ASSIGNEE_JSON=$(curl -sL https://raw.githubusercontent.com/YourUserName/YourRepoName/main/assignees.json)
+          echo "::set-output name=assignees::${ASSIGNEE_JSON}"
 
       - name: Create GitHub Issue
         env:
           GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
         run: |
-          ISSUE_TITLE="FROM WORKFLOW  python-app.yml workflow Fails"
+          ISSUE_TITLE="Workflow Failure: python-app.yml workflow"
           INITIATOR_USERNAME="${{ steps.initiator.outputs.username }}"
           BRANCH_NAME="${{ steps.branch.outputs.branch }}"
           COMMIT_MESSAGES="${{ steps.commit_messages.outputs.commit_messages }}"
           
+          # Parse the JSON array of assignees
+          ASSIGNEE_JSON="${{ steps.fetch_assignees.outputs.assignees }}"
+          ASSIGNEE_ARRAY=$(echo "${ASSIGNEE_JSON}" | jq -r '.[]')
+
+          # Create the issue body with the parsed assignees
+          ASSIGNEE_STRING=""
+          for assignee in $ASSIGNEE_ARRAY; do
+            ASSIGNEE_STRING="${ASSIGNEE_STRING}\"${assignee}\","
+          done
+          # Remove the trailing comma
+          ASSIGNEE_STRING="${ASSIGNEE_STRING%,}"
+
           # Replace newlines in commit messages with <br> for formatting in the issue body.
           COMMIT_MESSAGES_HTML=$(echo "${COMMIT_MESSAGES}" | awk '{printf "%s<br>",$0}')
 
-          ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}, Branch: ${BRANCH_NAME}\n\nCommit Messages:\n${COMMIT_MESSAGES_HTML}"
+          ISSUE_BODY="The workflow has failed. Initiator: @${INITIATOR_USERNAME}, Branch: ${BRANCH_NAME}\n\nCommit Messages:\n${COMMIT_MESSAGES_HTML}"
 
           # Create the issue using the GitHub API and assignees
           curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-          -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'","assignees":["Teebra","cerrybin","pinlom"]}' \
+          -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'","assignees":['"${ASSIGNEE_STRING}"']}' \
           "https://api.github.com/repos/Teebra/Tic-Tac-Toe-Game/issues"
