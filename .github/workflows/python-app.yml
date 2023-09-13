@@ -22,9 +22,9 @@ jobs:
 
       - name: Install tree and list directory
         run: |
-          apt-get update
-          apt-get install -y tree
-          tree
+          sudo apt-get update
+          sudo apt-get install -y tree
+          sudo tree
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
