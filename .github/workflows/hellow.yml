@@ -1,0 +1,85 @@
+name: Python package
+
+  push:
+    branches:
+      - test4
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint with flake8
+        run: |
+          # Stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Test with pytest
+        run: |
+          pytest -v test.py
+
+  create_issue:
+
+    needs: build
+    if: ${{ failure() }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Get Initiator Username
+        id: initiator
+        run: echo "::set-output name=username::${{ github.actor }}"
+
+      - name: Get Branch Name
+        id: branch
+        run: echo "::set-output name=branch::${{ github.ref }}"
+
+      - name: Get Commit Messages
+        id: commit_messages
+        run: |
+          # Retrieve the commit messages for the latest commit.
+          COMMIT_MESSAGES=$(git log --format=%B -n 1)
+
+          # Set the commit messages as an output.
+          echo "::set-output name=commit_messages::${COMMIT_MESSAGES}"
+
+      - name: Create GitHub Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_PAT }}
+        run: |
+          ISSUE_TITLE="FROM WORKFLOW  python-app.yml workflow Fails"
+          INITIATOR_USERNAME="${{ steps.initiator.outputs.username }}"
+          BRANCH_NAME="${{ steps.branch.outputs.branch }}"
+          COMMIT_MESSAGES="${{ steps.commit_messages.outputs.commit_messages }}"
+          
+          # <br> for formatting in the issue body.
+          COMMIT_MESSAGES_HTML=$(echo "${COMMIT_MESSAGES}" | awk '{printf "%s<br>",$0}')
+
+          ISSUE_BODY="Fixed the workflow. Initiator: @${INITIATOR_USERNAME}, Branch: ${BRANCH_NAME}\n\nCommit Messages:\n${COMMIT_MESSAGES_HTML}"
+
+          # Create the issue using the GitHub API and assignees
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -d '{"title":"'"$ISSUE_TITLE"'","body":"'"$ISSUE_BODY"'","assignees":["Teebra","cerrybin","pinlom"]}' \
+          "https://api.github.com/repos/Teebra/Tic-Tac-Toe-Game/issues"
