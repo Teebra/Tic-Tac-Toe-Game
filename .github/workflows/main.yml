@@ -1,0 +1,23 @@
+name: update_test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_an:
+    name: testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - run: mkdir -p artifact
+      
+      - run: echo hello > $GITHUB_WORKSPACE/artifact/world.txt
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: $GITHUB_WORKSPACE/artifact/world.txt
