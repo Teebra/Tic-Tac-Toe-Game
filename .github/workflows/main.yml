@@ -21,7 +21,7 @@ jobs:
       - name: Convert to sarif
         run: |
           sudo pip install joern2sarif
-          joern2sarif -t ocular -i ${GITHUB_WORKSPACE}/results.json -o ${GITHUB_WORKSPACE}/veracode-findings.sarif
+          joern2sarif -t ocular -i ${GITHUB_WORKSPACE}\results.json -o ${GITHUB_WORKSPACE}\veracode-findings.sarif
         env:
           WORKSPACE: ""
       
