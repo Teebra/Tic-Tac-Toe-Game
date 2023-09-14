@@ -11,13 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      
-      - run: mkdir -p artifact
-      
-      - run: echo hello > artifact/world.txt
-      
-      - uses: actions/upload-artifact@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
         with:
-          name: my-artifact
-          path: artifact/world.txt
+          python-version: '3.8'
+
+      - name: Convert to sarif
+        run: |
+          sudo pip install joern2sarif
+          joern2sarif -t ocular -i ${GITHUB_WORKSPACE}/results.json -o ${GITHUB_WORKSPACE}/veracode-findings.sarif
+        env:
+          WORKSPACE: ""
+      
+      - name: Upload Veracode results
+        uses: actions/upload-artifact@v3
+        with:
+          name: veracode-results-sarif
+          path: veracode-findings.sarif
+      
+      
