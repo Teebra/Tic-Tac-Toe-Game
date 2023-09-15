@@ -15,7 +15,7 @@ jobs:
       - name: Convert JSON to HTML Table
         uses: Teebra/JSON-to-HTML-table@main
         with:
-          json-file: result.json
+          json-file: 
 
       - name: Upload HTML Table to Artifacts
         uses: actions/upload-artifact@v3
