@@ -1,4 +1,4 @@
-name: Convert JSON to HTML Table with Mentions
+name: Convert JSON to SARIF and upload to GitHub
 
 on:
   push:
@@ -6,32 +6,20 @@ on:
       - main
 
 jobs:
-  convert-json-to-html-table-with-mentions:
+  convert-json-to-sarif:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: pip install json2table
-
-      - name: Convert JSON to HTML Table with Mentions
-        run: |
-          import json
-          from json2table import write_table
-
-          # Load the JSON data
-          json_data = json.load(open('result.json'))
-
-          # Highlight mentions
-          for mention in json_data['mentions']:
-            json_data[mention] = '<strong>{}</strong>'.format(json_data[mention])
-
-          # Write the HTML table
-          write_table(json_data, 'table.html')
+      - name: Convert JSON to SARIF
+        uses: garethr/snyk-to-sarif@master
+        with:
+          input: results.json
 
       - name: Upload HTML Table to Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: table.html
-          path: table.html
+          name: snyk_sarif
+          path: snyk.sarif
