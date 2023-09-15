@@ -12,16 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Convert JSON to HTML
-        uses: your-username/convert-json-to-html@v1
+      - name: Convert JSON to HTML Table
+        uses: Teebra/JSON-to-HTML-table@main
         with:
-          json-file: "results.json"
-
-      - name: Save HTML output
-        run: echo "${{ steps.convert-json-to-html.outputs.html }}" > output.html
+          json-file: result.json
 
       - name: Upload HTML Table to Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: output_html
-          path: output.html
+          path: test.html
