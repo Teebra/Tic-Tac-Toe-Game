@@ -18,12 +18,9 @@ jobs:
           # Read the JSON file
           json=$(cat results.json)
 
-          # Get the keys from the first object in the JSON array
-          keys=$(echo "$json" | jq -r '.[0] | keys_unsorted[]')
-
           # Generate the HTML table header
           header="<tr>"
-          for key in $keys; do
+          for key in $(echo "$json" | jq -r '.[0] | keys_unsorted[]'); do
             header+="<th>$key</th>"
           done
           header+="</tr>"
@@ -35,7 +32,7 @@ jobs:
               echo "$row" | base64 --decode | jq -r "$1"
             }
             rows+="<tr>"
-            for key in $keys; do
+            for key in $(echo "$json" | jq -r '.[0] | keys_unsorted[]'); do
               value=$(_jq ".$key")
               rows+="<td>$value</td>"
             done
