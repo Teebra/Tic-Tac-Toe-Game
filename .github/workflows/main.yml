@@ -9,17 +9,13 @@ jobs:
   convert-json-to-html:
     runs-on: ubuntu-latest
 
-    inputs:
-      json-file:
-        type: string
-
     steps:
       - uses: actions/checkout@v3
 
       - name: Convert JSON to HTML
         uses: your-username/convert-json-to-html@v1
         with:
-          json-file: ${{ inputs.json-file }}
+          json-file: "results.json"
 
       - name: Save HTML output
         run: echo "${{ steps.convert-json-to-html.outputs.html }}" > output.html
