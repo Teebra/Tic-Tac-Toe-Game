@@ -1,4 +1,4 @@
-name: Convert JSON to HTML
+name: My Workflow
 
 on:
   push:
@@ -6,28 +6,23 @@ on:
       - main
 
 jobs:
-  json-to-html:
+  convert-json-to-html:
     runs-on: ubuntu-latest
+
+    inputs:
+      json-file:
+        type: string
 
     steps:
       - uses: actions/checkout@v3
 
       - name: Convert JSON to HTML
-        run: |
-          # Install the necessary dependencies
-          sudo apt install python3-pip
-          pip3 install json-to-html
+        uses: your-username/convert-json-to-html@v1
+        with:
+          json-file: ${{ inputs.json-file }}
 
-          # Read the JSON file
-          with open("data.json", "r") as f:
-            json_data = json.load(f)
-
-          # Convert the JSON data to HTML
-          html_data = json_to_html.convert(json_data)
-
-          # Write the HTML data to a file
-          with open("output.html", "w") as f:
-            f.write(html_data)
+      - name: Save HTML output
+        run: echo "${{ steps.convert-json-to-html.outputs.html }}" > output.html
 
       - name: Upload HTML Table to Artifacts
         uses: actions/upload-artifact@v3
