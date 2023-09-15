@@ -15,11 +15,11 @@ jobs:
       - name: Convert JSON to HTML Table
         uses: Teebra/JSON-to-HTML-table@main
         with:
-          json-file: japan.json
+          json-file: jsd/resl.json
 
 
       - name: Upload HTML Table to Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: output_html
-          path: japan.html
+          path: resl.html

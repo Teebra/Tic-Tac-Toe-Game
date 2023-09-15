@@ -1,0 +1,651 @@
+{
+    "_links": {
+      "root": {
+        "href": "/"
+      },
+      "self": {
+        "href": "/scans/ebf5d2c8-d099-4a20-902a-a70d6a148516/findings"
+      },
+      "help": {
+        "href": "https://help.veracode.com/reader/tS9CaFwL4_lbIEWWomsJoA/ovfZGgu96UINQxIuTqRDwg"
+      }
+    },
+    "scan_id": "ebf5d2c8-d099-4a20-902a-a70d6a148516",
+    "scan_status": "SUCCESS",
+    "message": "Scan successful. Results size: 33133 bytes",
+    "modules": [
+      "fhir-0.0.1-SNAPSHOT.jar",
+      "JS files within fhir-0.0.1-SNAPSHOT.jar"
+    ],
+    "modules_count": 2,
+    "findings": [
+      {
+        "title": "management.endpoints.web.exposure.include",
+        "issue_id": 1012,
+        "gob": "B",
+        "severity": 4,
+        "issue_type_id": "crypto",
+        "issue_type": "Exposed Dangerous Method or Function",
+        "cwe_id": "749",
+        "display_text": "\u003cspan\u003eThe application contains dangerous administrative functionality which is enabled via the management.endpoints.web.exposure.include configuration property. An attacker could use the exposed methods to perform sensitive operations on the application and leverage it to execute sophisticated attacks. These can amount to Denial-of-Service or tampering with application run-time behavior.\u003c/span\u003e \u003cspan\u003eEnsure that any administrative features or sensitive operations are not enabled in production if they are not needed. Set  to a value that prevents unathorized access or put other mitigating controls in place (e.g. network firewall rules) to prevent access by unauthorized parties. Ensure that proper authentication and authorization controls are in place for any required sensitive operations.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/749.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application.properties",
+            "line": 107,
+            "function_name": "application",
+            "qualified_function_name": "application.application.application",
+            "function_prototype": "void application(void)",
+            "scope": "application.application"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "3837931678",
+          "prototype_hash": "211846691",
+          "flaw_hash": "836391459",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "1315957173",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/749.html"
+      },
+      {
+        "title": "management.endpoints.web.exposure.include",
+        "issue_id": 1005,
+        "gob": "B",
+        "severity": 4,
+        "issue_type_id": "crypto",
+        "issue_type": "Exposed Dangerous Method or Function",
+        "cwe_id": "749",
+        "display_text": "\u003cspan\u003eThe application contains dangerous administrative functionality which is enabled via the management.endpoints.web.exposure.include configuration property. An attacker could use the exposed methods to perform sensitive operations on the application and leverage it to execute sophisticated attacks. These can amount to Denial-of-Service or tampering with application run-time behavior.\u003c/span\u003e \u003cspan\u003eEnsure that any administrative features or sensitive operations are not enabled in production if they are not needed. Set  to a value that prevents unathorized access or put other mitigating controls in place (e.g. network firewall rules) to prevent access by unauthorized parties. Ensure that proper authentication and authorization controls are in place for any required sensitive operations.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/749.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application-qa.properties",
+            "line": 107,
+            "function_name": "application-qa",
+            "qualified_function_name": "application-qa.application-qa.application-qa",
+            "function_prototype": "void application-qa(void)",
+            "scope": "application-qa.application-qa"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "4271495391",
+          "prototype_hash": "211846691",
+          "flaw_hash": "836391459",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "1315957173",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/749.html"
+      },
+      {
+        "title": "management.endpoints.web.exposure.include",
+        "issue_id": 1008,
+        "gob": "B",
+        "severity": 4,
+        "issue_type_id": "crypto",
+        "issue_type": "Exposed Dangerous Method or Function",
+        "cwe_id": "749",
+        "display_text": "\u003cspan\u003eThe application contains dangerous administrative functionality which is enabled via the management.endpoints.web.exposure.include configuration property. An attacker could use the exposed methods to perform sensitive operations on the application and leverage it to execute sophisticated attacks. These can amount to Denial-of-Service or tampering with application run-time behavior.\u003c/span\u003e \u003cspan\u003eEnsure that any administrative features or sensitive operations are not enabled in production if they are not needed. Set  to a value that prevents unathorized access or put other mitigating controls in place (e.g. network firewall rules) to prevent access by unauthorized parties. Ensure that proper authentication and authorization controls are in place for any required sensitive operations.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/749.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application-int.properties",
+            "line": 115,
+            "function_name": "application-int",
+            "qualified_function_name": "application-int.application-int.application-int",
+            "function_prototype": "void application-int(void)",
+            "scope": "application-int.application-int"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "3723383073",
+          "prototype_hash": "211846691",
+          "flaw_hash": "836391459",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "1315957173",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/749.html"
+      },
+      {
+        "title": "management.endpoints.web.exposure.include",
+        "issue_id": 1010,
+        "gob": "B",
+        "severity": 4,
+        "issue_type_id": "crypto",
+        "issue_type": "Exposed Dangerous Method or Function",
+        "cwe_id": "749",
+        "display_text": "\u003cspan\u003eThe application contains dangerous administrative functionality which is enabled via the management.endpoints.web.exposure.include configuration property. An attacker could use the exposed methods to perform sensitive operations on the application and leverage it to execute sophisticated attacks. These can amount to Denial-of-Service or tampering with application run-time behavior.\u003c/span\u003e \u003cspan\u003eEnsure that any administrative features or sensitive operations are not enabled in production if they are not needed. Set  to a value that prevents unathorized access or put other mitigating controls in place (e.g. network firewall rules) to prevent access by unauthorized parties. Ensure that proper authentication and authorization controls are in place for any required sensitive operations.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/749.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application-dev.properties",
+            "line": 112,
+            "function_name": "application-dev",
+            "qualified_function_name": "application-dev.application-dev.application-dev",
+            "function_prototype": "void application-dev(void)",
+            "scope": "application-dev.application-dev"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "515843398",
+          "prototype_hash": "211846691",
+          "flaw_hash": "836391459",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "1315957173",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/749.html"
+      },
+      {
+        "title": "management.endpoints.web.exposure.include",
+        "issue_id": 1006,
+        "gob": "B",
+        "severity": 4,
+        "issue_type_id": "crypto",
+        "issue_type": "Exposed Dangerous Method or Function",
+        "cwe_id": "749",
+        "display_text": "\u003cspan\u003eThe application contains dangerous administrative functionality which is enabled via the management.endpoints.web.exposure.include configuration property. An attacker could use the exposed methods to perform sensitive operations on the application and leverage it to execute sophisticated attacks. These can amount to Denial-of-Service or tampering with application run-time behavior.\u003c/span\u003e \u003cspan\u003eEnsure that any administrative features or sensitive operations are not enabled in production if they are not needed. Set  to a value that prevents unathorized access or put other mitigating controls in place (e.g. network firewall rules) to prevent access by unauthorized parties. Ensure that proper authentication and authorization controls are in place for any required sensitive operations.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/749.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application-cloud.properties",
+            "line": 106,
+            "function_name": "application-cloud",
+            "qualified_function_name": "application-cloud.application-cloud.application-cloud",
+            "function_prototype": "void application-cloud(void)",
+            "scope": "application-cloud.application-cloud"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "3703320448",
+          "prototype_hash": "211846691",
+          "flaw_hash": "836391459",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "1315957173",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/749.html"
+      },
+      {
+        "title": "org.slf4j.Logger.info",
+        "issue_id": 1025,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "taint",
+        "issue_type": "Improper Output Neutralization for Logs",
+        "cwe_id": "117",
+        "display_text": "\u003cspan\u003eThis call to org.slf4j.Logger.info() could result in a log forging attack.  Writing untrusted data into a log file allows an attacker to forge log entries or inject malicious content into log files.  Corrupted log files can be used to cover an attacker\u0027s tracks or as a delivery mechanism for an attack on a log viewing or processing utility.  For example, if a web administrator uses a browser-based utility to review logs, a cross-site scripting attack might be possible. The first argument to info() contains tainted data. The tainted data originated from an earlier call to AnnotationVirtualController.vc_taintobj.\u003c/span\u003e \u003cspan\u003eAvoid directly embedding user input in log files when possible.  Sanitize untrusted data used to construct log entries by using a safe logging mechanism such as the OWASP ESAPI Logger, which will automatically remove unexpected carriage returns and line feeds and can be configured to use HTML entity encoding for non-alphanumeric data.  Alternatively, some of the XSS escaping functions from the OWASP Java Encoder project will also sanitize CRLF sequences.  Only create a custom blocklist when absolutely necessary.  Always validate untrusted input to ensure that it conforms to the expected format, using centralized data validation routines when possible.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/117.html\"\u003eCWE\u003c/a\u003e \u003ca href\u003d\"https://owasp.org/www-community/attacks/Log_Injection\"\u003eOWASP\u003c/a\u003e \u003ca href\u003d\"https://docs.veracode.com/r/review_cleansers?tocId\u003dnYnZqAenFFZmB75MQrZwuA\"\u003eSupported Cleansers\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/fhir/profiles/RestfulResourceProvider.java",
+            "line": 448,
+            "function_name": "ensurePatient",
+            "qualified_function_name": "com.mscs.emr.fhir.profiles.RestfulResourceProvider.ensurePatient",
+            "function_prototype": "ejb.entity.patient.Patient ensurePatient(ejb.entity.patient.Patient, boolean)",
+            "scope": "com.mscs.emr.fhir.profiles.RestfulResourceProvider"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "484111989",
+          "prototype_hash": "1919200321",
+          "flaw_hash": "2758530316",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "4273881918",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "4191665957",
+          "cause_hash2_ordinal": "1"
+        },
+        "stack_dumps": {
+          "stack_dump": [
+            {}
+          ]
+        },
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/117.html"
+      },
+      {
+        "title": "org.slf4j.Logger.info",
+        "issue_id": 1026,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "taint",
+        "issue_type": "Improper Output Neutralization for Logs",
+        "cwe_id": "117",
+        "display_text": "\u003cspan\u003eThis call to org.slf4j.Logger.info() could result in a log forging attack.  Writing untrusted data into a log file allows an attacker to forge log entries or inject malicious content into log files.  Corrupted log files can be used to cover an attacker\u0027s tracks or as a delivery mechanism for an attack on a log viewing or processing utility.  For example, if a web administrator uses a browser-based utility to review logs, a cross-site scripting attack might be possible. The second argument to info() contains tainted data from the variables (new Object\\[...\\]). The tainted data originated from an earlier call to AnnotationVirtualController.vc_taintobj.\u003c/span\u003e \u003cspan\u003eAvoid directly embedding user input in log files when possible.  Sanitize untrusted data used to construct log entries by using a safe logging mechanism such as the OWASP ESAPI Logger, which will automatically remove unexpected carriage returns and line feeds and can be configured to use HTML entity encoding for non-alphanumeric data.  Alternatively, some of the XSS escaping functions from the OWASP Java Encoder project will also sanitize CRLF sequences.  Only create a custom blocklist when absolutely necessary.  Always validate untrusted input to ensure that it conforms to the expected format, using centralized data validation routines when possible.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/117.html\"\u003eCWE\u003c/a\u003e \u003ca href\u003d\"https://owasp.org/www-community/attacks/Log_Injection\"\u003eOWASP\u003c/a\u003e \u003ca href\u003d\"https://docs.veracode.com/r/review_cleansers?tocId\u003dnYnZqAenFFZmB75MQrZwuA\"\u003eSupported Cleansers\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/fhir/profiles/RestfulResourceProvider.java",
+            "line": 448,
+            "function_name": "ensurePatient",
+            "qualified_function_name": "com.mscs.emr.fhir.profiles.RestfulResourceProvider.ensurePatient",
+            "function_prototype": "ejb.entity.patient.Patient ensurePatient(ejb.entity.patient.Patient, boolean)",
+            "scope": "com.mscs.emr.fhir.profiles.RestfulResourceProvider"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "484111989",
+          "prototype_hash": "1919200321",
+          "flaw_hash": "2758530316",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "4273881918",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "924212640",
+          "cause_hash2_ordinal": "1"
+        },
+        "stack_dumps": {
+          "stack_dump": [
+            {}
+          ]
+        },
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/117.html"
+      },
+      {
+        "title": "PASSWORD_FAILURE_TOO_MANY_TIMES initializer",
+        "issue_id": 1001,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Use of Hard-coded Password",
+        "cwe_id": "259",
+        "display_text": "\u003cspan\u003eThis variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack.  In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. PASSWORD_FAILURE_TOO_MANY_TIMES initializer\u003c/span\u003e \u003cspan\u003eStore passwords out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/259.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/ejb/dto/SharedUtils.java",
+            "line": 1,
+            "function_name": "UNKNOWN",
+            "qualified_function_name": "UNKNOWN",
+            "function_prototype": "UNKNOWN",
+            "scope": "UNKNOWN"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "3800512882",
+          "prototype_hash": "0",
+          "flaw_hash": "1109936422",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "0",
+          "cause_hash_count": 0,
+          "cause_hash_ordinal": 0,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/259.html"
+      },
+      {
+        "title": "java.lang.Math.random",
+        "issue_id": 1014,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "reliability",
+        "issue_type": "Insufficient Entropy",
+        "cwe_id": "331",
+        "display_text": "\u003cspan\u003eStandard random number generators do not provide a sufficient amount of entropy when used for security purposes. Attackers can brute force the output of pseudorandom number generators such as rand().\u003c/span\u003e \u003cspan\u003eIf this random number is used where security is a concern, such as generating a session key or session identifier, use a trusted cryptographic random number generator instead.  These can be found on the Windows platform in the CryptoAPI or in an open source library such as OpenSSL.  In Java, use the SecureRandom object to ensure sufficient entropy.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/331.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/ejb/dto/SharedUtils.java",
+            "line": 2219,
+            "function_name": "getRandomId",
+            "qualified_function_name": "com.mscs.emr.ejb.dto.SharedUtils.getRandomId",
+            "function_prototype": "java.lang.String getRandomId(void)",
+            "scope": "com.mscs.emr.ejb.dto.SharedUtils"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "3905814360",
+          "prototype_hash": "4146034803",
+          "flaw_hash": "1045678525",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "4282366815",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/331.html"
+      },
+      {
+        "title": "P_USERNAME initializer",
+        "issue_id": 1002,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Use of Hard-coded Credentials",
+        "cwe_id": "798",
+        "display_text": "\u003cspan\u003eThe application contains hard-coded information that may contain credentials to an external service.  The use of hard-coded credentials significantly increases the possibility that the account being protected will be compromised. P_USERNAME initializer\u003c/span\u003e \u003cspan\u003eStore credentials out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/798.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/ejb/LoginUtils.java",
+            "line": 1,
+            "function_name": "UNKNOWN",
+            "qualified_function_name": "UNKNOWN",
+            "function_prototype": "UNKNOWN",
+            "scope": "UNKNOWN"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "653756829",
+          "prototype_hash": "0",
+          "flaw_hash": "1389614421",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "0",
+          "cause_hash_count": 0,
+          "cause_hash_ordinal": 0,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/798.html"
+      },
+      {
+        "title": "P_PASSWORD initializer",
+        "issue_id": 1003,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Use of Hard-coded Password",
+        "cwe_id": "259",
+        "display_text": "\u003cspan\u003eThis variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack.  In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. P_PASSWORD initializer\u003c/span\u003e \u003cspan\u003eStore passwords out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/259.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/ejb/LoginUtils.java",
+            "line": 1,
+            "function_name": "UNKNOWN",
+            "qualified_function_name": "UNKNOWN",
+            "function_prototype": "UNKNOWN",
+            "scope": "UNKNOWN"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "653756829",
+          "prototype_hash": "0",
+          "flaw_hash": "804656259",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "0",
+          "cause_hash_count": 0,
+          "cause_hash_ordinal": 0,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/259.html"
+      },
+      {
+        "title": "disable",
+        "issue_id": 1000,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Cross-Site Request Forgery (CSRF)",
+        "cwe_id": "352",
+        "display_text": "\u003cspan\u003eThis application seems to be explicitly disabled default secure protection provided by Spring Security framework against cross site request forgery attacks. If this disabled protection is deployed in production environments, it could allow a malicious web application to influence the interactions between (trusted) client browser and web-server.\u003c/span\u003e \u003cspan\u003eMake sure this disabled protection configuration is not deployed in real time production environment. Additional protection mechanisms against CSRF attacks are discussed in references.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.md\"\u003eOWASP\u003c/a\u003e\u003cbr\u003e\u003ca href\u003d\"https://docs.spring.io/spring-security/reference/features/exploits/csrf.html\"\u003eCSRF Protection in Spring Security\u003c/a\u003e\u003cbr\u003e\u003ca href\u003d\"https://cwe.mitre.org/data/definitions/352.html\"\u003eCWE 352\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/config/SecurityConfiguration.java",
+            "line": 20,
+            "function_name": "filterChain",
+            "qualified_function_name": "com.mscs.emr.config.SecurityConfiguration.filterChain",
+            "function_prototype": "org.springframework.security.web.SecurityFilterChain filterChain(org.springframework.security.config.annotation.web.builders.HttpSecurity)",
+            "scope": "com.mscs.emr.config.SecurityConfiguration"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "1064972481",
+          "prototype_hash": "465534141",
+          "flaw_hash": "2017488615",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "2853736140",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/352.html"
+      },
+      {
+        "title": "spring.datasource.password",
+        "issue_id": 1011,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Use of Hard-coded Password",
+        "cwe_id": "259",
+        "display_text": "\u003cspan\u003eThis variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack.  In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. spring.datasource.password\u003c/span\u003e \u003cspan\u003eStore passwords out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/259.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application.properties",
+            "line": 84,
+            "function_name": "application",
+            "qualified_function_name": "application.application.application",
+            "function_prototype": "void application(void)",
+            "scope": "application.application"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "3837931678",
+          "prototype_hash": "211846691",
+          "flaw_hash": "3075830661",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "548444629",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/259.html"
+      },
+      {
+        "title": "spring.datasource.password",
+        "issue_id": 1004,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Use of Hard-coded Password",
+        "cwe_id": "259",
+        "display_text": "\u003cspan\u003eThis variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack.  In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. spring.datasource.password\u003c/span\u003e \u003cspan\u003eStore passwords out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/259.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application-qa.properties",
+            "line": 84,
+            "function_name": "application-qa",
+            "qualified_function_name": "application-qa.application-qa.application-qa",
+            "function_prototype": "void application-qa(void)",
+            "scope": "application-qa.application-qa"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "4271495391",
+          "prototype_hash": "211846691",
+          "flaw_hash": "1038532266",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "1192528301",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/259.html"
+      },
+      {
+        "title": "spring.datasource.password",
+        "issue_id": 1007,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Use of Hard-coded Password",
+        "cwe_id": "259",
+        "display_text": "\u003cspan\u003eThis variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack.  In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. spring.datasource.password\u003c/span\u003e \u003cspan\u003eStore passwords out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/259.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application-int.properties",
+            "line": 92,
+            "function_name": "application-int",
+            "qualified_function_name": "application-int.application-int.application-int",
+            "function_prototype": "void application-int(void)",
+            "scope": "application-int.application-int"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "3723383073",
+          "prototype_hash": "211846691",
+          "flaw_hash": "3289229005",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "540274345",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/259.html"
+      },
+      {
+        "title": "spring.datasource.password",
+        "issue_id": 1009,
+        "gob": "B",
+        "severity": 3,
+        "issue_type_id": "crypto",
+        "issue_type": "Use of Hard-coded Password",
+        "cwe_id": "259",
+        "display_text": "\u003cspan\u003eThis variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack.  In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. spring.datasource.password\u003c/span\u003e \u003cspan\u003eStore passwords out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/259.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "BOOT-INF/classes/application-dev.properties",
+            "line": 85,
+            "function_name": "application-dev",
+            "qualified_function_name": "application-dev.application-dev.application-dev",
+            "function_prototype": "void application-dev(void)",
+            "scope": "application-dev.application-dev"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "515843398",
+          "prototype_hash": "211846691",
+          "flaw_hash": "3075830661",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "548444629",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/259.html"
+      },
+      {
+        "title": "java.nio.file.Files.write",
+        "issue_id": 1027,
+        "gob": "B",
+        "severity": 2,
+        "issue_type_id": "taint",
+        "issue_type": "Information Exposure Through an Error Message",
+        "cwe_id": "209",
+        "display_text": "\u003cspan\u003e The application calls the java.nio.file.Files.write() function, which may expose information about the application logic or other details such as the names and versions of the application container and associated components.  This information can be useful in executing other attacks and can also enable the attacker to target known vulnerabilities in application components. The second argument to write() contains data from an error message (possibly containing untrusted data) from the variable toStringWithStackTrace(). The data from an error message (possibly containing untrusted data) originated from earlier calls to java.lang.Throwable.toString, com.fasterxml.jackson.core.JsonProcessingException.toString, com.lowagie.text.ExceptionConverter.toString, com.lowagie.text.ExceptionConverter.printStackTrace, and java.lang.Throwable.printStackTrace.\u003c/span\u003e \u003cspan\u003eEnsure that error codes or other messages returned to end users are not overly verbose.  Sanitize all messages of any sensitive information that is not absolutely necessary.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/209.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/util/pdf/PDFUtil.java",
+            "line": 397,
+            "function_name": "collectPDF",
+            "qualified_function_name": "com.mscs.emr.util.pdf.PDFUtil.collectPDF",
+            "function_prototype": "java.nio.file.Path collectPDF(htmltopdf.PDFCreationParams, java.lang.String, byte  [], java.lang.Throwable)",
+            "scope": "com.mscs.emr.util.pdf.PDFUtil"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "2301648656",
+          "prototype_hash": "3741915103",
+          "flaw_hash": "948860202",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "3323396109",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "2853736140",
+          "cause_hash2_ordinal": "1"
+        },
+        "stack_dumps": {
+          "stack_dump": [
+            {}
+          ]
+        },
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/209.html"
+      },
+      {
+        "title": "java.lang.ClassLoader.getResourceAsStream",
+        "issue_id": 1013,
+        "gob": "B",
+        "severity": 0,
+        "issue_type_id": "reliability",
+        "issue_type": "Improper Resource Shutdown or Release",
+        "cwe_id": "404",
+        "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable getInputStreamForPath, which was previously allocated by a call to java.lang.ClassLoader.getResourceAsStream().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+        "files": {
+          "source_file": {
+            "file": "com/mscs/emr/ejb/session/ssnGen/XlsDocProducer.java",
+            "line": 72,
+            "function_name": "getInputStreamForPath",
+            "qualified_function_name": "com.mscs.emr.ejb.session.ssnGen.XlsDocProducer.getInputStreamForPath",
+            "function_prototype": "java.io.InputStream getInputStreamForPath(java.lang.String)",
+            "scope": "com.mscs.emr.ejb.session.ssnGen.XlsDocProducer"
+          }
+        },
+        "flaw_match": {
+          "procedure_hash": "171084031",
+          "prototype_hash": "2798170499",
+          "flaw_hash": "1663307696",
+          "flaw_hash_count": 1,
+          "flaw_hash_ordinal": 1,
+          "cause_hash": "1176028798",
+          "cause_hash_count": 1,
+          "cause_hash_ordinal": 1,
+          "cause_hash2": "0",
+          "cause_hash2_ordinal": "0"
+        },
+        "stack_dumps": {},
+        "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
+      }
+    ],
+    "selected_modules": [],
+    "pipeline_scan": "23.9.0-0",
+    "project_name": "mckesson-ontada-fhir-service-replica",
+    "dev_stage": "DEVELOPMENT"
+  }
