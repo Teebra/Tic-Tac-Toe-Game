@@ -1,4 +1,4 @@
-name: update_test
+name: Convert JSON to HTML
 
 on:
   push:
@@ -6,29 +6,26 @@ on:
       - main
 
 jobs:
-  build_an:
-    name: testing
+  convert:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-
-      - name: Convert to sarif
+      - name: Convert JSON to HTML
         run: |
-          sudo pip install joern2sarif
-          joern2sarif -t ocular -i ${GITHUB_WORKSPACE}\results.json -o ${GITHUB_WORKSPACE}\veracode-findings.sarif
-        env:
-          WORKSPACE: ""
-      
+          # Read the JSON file
+          json=$(cat results.json)
+
+          # Convert JSON to HTML table using a tool like jq
+          html=$(echo "$json" | jq -r '["<table>"] + (.[] | ["<tr>", "<td>", .field1, "</td>", "<td>", .field2, "</td>", "</tr>"]) + ["</table>"] | join("")')
+
+          # Write the HTML table to a file
+          echo "$html" > results.html
+
       - name: Upload Veracode results
         uses: actions/upload-artifact@v3
         with:
-          name: veracode-results-sarif
-          path: veracode-findings.sarif
-      
-      
+          name: results_html
+          path: results.html
