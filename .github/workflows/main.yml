@@ -1,4 +1,4 @@
-name: Convert JSON to HTML Table
+name: Convert JSON to HTML Table with Mentions
 
 on:
   push:
@@ -6,15 +6,29 @@ on:
       - main
 
 jobs:
-  convert-json-to-html-table:
+  convert-json-to-html-table-with-mentions:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Convert JSON to HTML Table
+      - name: Install dependencies
+        run: pip install json2table
+
+      - name: Convert JSON to HTML Table with Mentions
         run: |
-          json2table write result.json > table.html
+          import json
+          from json2table import write_table
+
+          # Load the JSON data
+          json_data = json.load(open('result.json'))
+
+          # Highlight mentions
+          for mention in json_data['mentions']:
+            json_data[mention] = '<strong>{}</strong>'.format(json_data[mention])
+
+          # Write the HTML table
+          write_table(json_data, 'table.html')
 
       - name: Upload HTML Table to Artifacts
         uses: actions/upload-artifact@v3
