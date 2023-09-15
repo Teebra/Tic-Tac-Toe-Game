@@ -18,8 +18,32 @@ jobs:
           # Read the JSON file
           json=$(cat results.json)
 
-          # Convert JSON to HTML table using a tool like jq
-          html=$(echo "$json" | jq -r '["<table>"] + (.[] | ["<tr>", "<td>", .field1, "</td>", "<td>", .field2, "</td>", "</tr>"]) + ["</table>"] | join("")')
+          # Get the keys from the first object in the JSON array
+          keys=$(echo "$json" | jq -r '.[0] | keys_unsorted[]')
+
+          # Generate the HTML table header
+          header="<tr>"
+          for key in $keys; do
+            header+="<th>$key</th>"
+          done
+          header+="</tr>"
+
+          # Generate the HTML table rows
+          rows=""
+          for row in $(echo "$json" | jq -r '.[] | @base64'); do
+            _jq() {
+              echo "$row" | base64 --decode | jq -r "$1"
+            }
+            rows+="<tr>"
+            for key in $keys; do
+              value=$(_jq ".$key")
+              rows+="<td>$value</td>"
+            done
+            rows+="</tr>"
+          done
+
+          # Generate the complete HTML table
+          html="<table>$header$rows</table>"
 
           # Write the HTML table to a file
           echo "$html" > results.html
