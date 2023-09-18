@@ -1,63 +1,55 @@
-name: My Workflow
+name: Check Severity
 
 on:
   push:
     branches:
-      - main
+      - main  # Replace with your branch name or desired trigger
 
 jobs:
-  convert-json-to-html:
+  check_severity:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # - name: Convert JSON to HTML Table
-      #   uses: Teebra/JSON-to-HTML-table@V1
-      #   with:
-      #     json-file: jsd/resl.json
+    - name: Install jq
+      run: sudo apt-get update && sudo apt-get install jq
 
+    - name: Run the script
+      run: |
+        # Load the JSON file
+        data=$(cat $RESULTS_JSON)
 
-      # - name: Upload HTML Table to Artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: output_html
-      #     path: output.html
+        # Initialize variables for severity 4 and severity 5 counts
+        severity_4=0
+        severity_5=0
 
-      - name: Check for High Severity
-        run: |
-          # Load the JSON file
-          data=$(cat japan.json)
+        # Extract severity from findings and update variables
+        findings=$(echo "$data" | jq -c '.findings[]')
+        while read -r finding; do
+            severity=$(echo "$finding" | jq -r '.severity')
+            if [ "$severity" != "null" ]; then
+                if [ "$severity" -eq 4 ]; then
+                    ((severity_4++))
+                elif [ "$severity" -eq 5 ]; then
+                    ((severity_5++))
+                fi
+            fi
+        done <<< "$findings"
 
-          # Initialize variables for severity 4 and severity 5 counts
-          severity_4=0
-          severity_5=0
+        # Print the counts for severity 4 and severity 5
+        echo "Severity 4 Count: $severity_4"
+        echo "Severity 5 Count: $severity_5"
 
-          # Extract severity from findings and update variables
-          findings=$(echo "$data" | jq -c '.findings[]')
-          while read -r finding; do
-              severity=$(echo "$finding" | jq -r '.severity')
-              if [ "$severity" != "null" ]; then
-                  if [ "$severity" -eq 4 ]; then
-                      ((severity_4++))
-                  elif [ "$severity" -eq 5 ]; then
-                      ((severity_5++))
-                  fi
-              fi
-          done <<< "$findings"
+        # Check if severity 4 count is greater than 3 and print
+        if [ "$severity_4" -gt 3 ]; then
+            echo "High severity: $severity_4"
+        fi
 
-          # Print the counts for severity 4 and severity 5
-          echo "Severity 4 Count: $severity_4"
-          echo "Severity 5 Count: $severity_5"
-
-          # Check if severity 4 count is greater than 3 and print
-          if [ "$severity_4" -gt 3 ]; then
-              echo "High severity: $severity_4"
-          fi
-
-          # Check if severity 5 count is greater than 3 and print
-          if [ "$severity_5" -gt 3 ]; then
-              echo "High severity: $severity_5"
-          fi
-        env:
-          RESULTS_JSON: japan.json
+        # Check if severity 5 count is greater than 3 and print
+        if [ "$severity_5" -gt 3 ]; then
+            echo "High severity: $severity_5"
+        fi
+      env:
+        RESULTS_JSON: japan.json
