@@ -13,42 +13,28 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Get results.json file
-      run: |
-        json_data=$(cat results.json)
+    # - name: Get results.json file
+    #   run: |
+    #     json_data=$(cat results.json)
 
     - name: Run the script
       run: |
-        # Load the JSON file directly
-        # data=$(cat results.json)
-
-        severity_4=$(grep -E -c '"severity": "4"' results.json || true)
-        severity_5=$(grep -E -c '"severity": "5"' results.json || true)
-
-        # Print the counts for severity 4 and severity 5
-        echo "Severity 4 Count: $severity_4"
-        echo "Severity 5 Count: $severity_5"
-
-
-        current_directory=$(pwd)
+        json_data=$(cat results.json)
+        # Extract the severity 4 and severity 5 findings and count them
+        severity_4_count=$(echo "$json_data" | jq '.findings[] | select(.severity == 4) | .severity' | wc -l)
+        severity_5_count=$(echo "$json_data" | jq '.findings[] | select(.severity == 5) | .severity' | wc -l)
         
-        # Print the current directory
-        echo "Current Directory: $current_directory"
+        # Print the counts
+        echo "Severity 4 Count: $severity_4_count"
+        echo "Severity 5 Count: $severity_5_count"
         
-        # You can use the $current_directory variable in subsequent steps
-        # For example, to list the contents of the current directory:
-        ls -l $current_directory
-
-        # # Initialize variables for severity 4 and severity 5 counts
-        # severity_4=$(echo "$data" | grep -c '"severity": "4"')
-        # severity_5=$(echo "$data" | grep -c '"severity": "5"')
-
         # Check if severity 4 count is greater than 3 and print
-        if [ "$severity_4" -gt "3" ]; then
-            echo "High severity: $severity_4"
+        if [ "$severity_4_count" -gt 3 ]; then
+            echo "High severity 4: $severity_4_count"
+        fi
+        
+        # Check if severity 5 count is greater than 3 and print
+        if [ "$severity_5_count" -gt 3 ]; then
+            echo "High severity 5: $severity_5_count"
         fi
 
-        # Check if severity 5 count is greater than 3 and print
-        if [ "$severity_5" -gt "3" ]; then
-            echo "High severity: $severity_5"
-        fi
