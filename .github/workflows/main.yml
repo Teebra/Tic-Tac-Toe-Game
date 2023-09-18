@@ -1,29 +1,37 @@
-name: Collect severity from JSON file
+name: Check Severity
 
 on:
   push:
     branches:
-      - main
+      - main  # Replace with your branch name or desired trigger
 
 jobs:
-  build:
+  check_severity:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Collect severity from JSON file
-        run: |
-          npm install jq
+    - name: Run the script
+      run: |
+        # Load the JSON file directly
+        data=$(cat results.json)
 
-          # Get the severity from the JSON file
-          severity=$(jq -r '.severity' < results.json)
+        # Initialize variables for severity 4 and severity 5 counts
+        severity_4=$(echo "$data" | grep -c '"severity": "4"')
+        severity_5=$(echo "$data" | grep -c '"severity": "5"')
 
-          # Output the severity
-          echo "Severity: $severity"
+        # Print the counts for severity 4 and severity 5
+        echo "Severity 4 Count: $severity_4"
+        echo "Severity 5 Count: $severity_5"
 
-      - name: Upload severity to artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: severity
-          path: ${{ steps.collect-severity.outputs.severity }}
+        # Check if severity 4 count is greater than 3 and print
+        if [ "$severity_4" -gt "3" ]; then
+            echo "High severity: $severity_4"
+        fi
+
+        # Check if severity 5 count is greater than 3 and print
+        if [ "$severity_5" -gt "3" ]; then
+            echo "High severity: $severity_5"
+        fi
