@@ -17,11 +17,9 @@ jobs:
       run: sudo apt-get update && sudo apt-get install jq
 
     - name: Run the script
-      env:
-        RESULTS_JSON: results.json
       run: |
         # Load the JSON file
-        data=$(cat $RESULTS_JSON)
+        data=$(cat results.json)
 
         # Initialize variables for severity 4 and severity 5 counts
         severity_4=0
