@@ -15,6 +15,7 @@ jobs:
 
     - name: Get results.json file
       run: |
+        pip install json2table
         python json-html-table.py
 
     - name: Upload HTML Table to Artifacts
