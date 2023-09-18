@@ -12,17 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Convert JSON to HTML Table
-        uses: Teebra/JSON-to-HTML-table@V1
-        with:
-          json-file: jsd/resl.json
+      # - name: Convert JSON to HTML Table
+      #   uses: Teebra/JSON-to-HTML-table@V1
+      #   with:
+      #     json-file: jsd/resl.json
 
 
-      - name: Upload HTML Table to Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: output_html
-          path: output.html
+      # - name: Upload HTML Table to Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: output_html
+      #     path: output.html
 
       - name: Check for High Severity
         run: |
