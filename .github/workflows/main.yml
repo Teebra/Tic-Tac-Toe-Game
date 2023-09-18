@@ -30,8 +30,8 @@ jobs:
         
          # Check if either severity 4 or severity 5 counts are greater than 3 and print
         if [ "$severity_4_count" -gt 3 ] || [ "$severity_5_count" -gt 3 ]; then
-            echo "High severity 4: $severity_4_count"
-            echo "High severity 5: $severity_5_count"
+            echo "High severity $severity_4_count, which is higher than necessary."
+            echo "Very High severity $severity_5_count, which is higher than necessary."
             exit 1  # Fail the workflow
         fi
 
