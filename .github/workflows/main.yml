@@ -13,6 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Get results.json file
+      run: |
+        cat results.json
+
     - name: Run the script
       run: |
         # Load the JSON file directly
