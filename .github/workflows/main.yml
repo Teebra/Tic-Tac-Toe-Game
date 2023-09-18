@@ -27,7 +27,7 @@ jobs:
       - name: Check for High Severity
         run: |
           # Load the JSON file
-          data=$(cat results.json)
+          data=$(cat japan.json)
 
           # Initialize variables for severity 4 and severity 5 counts
           severity_4=0
@@ -60,4 +60,4 @@ jobs:
               echo "High severity: $severity_5"
           fi
         env:
-          RESULTS_JSON: results.json
+          RESULTS_JSON: japan.json
