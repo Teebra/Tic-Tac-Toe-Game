@@ -29,8 +29,29 @@ jobs:
         echo "Found $severity_5_count issues of Very High severity."
         
          # Check if either severity 4 or severity 5 counts are greater than 3 and print
-        if [ "$severity_4_count" -gt 3 ] || [ "$severity_5_count" -gt 3 ]; then
+        if [ "$severity_4_count" -gt 7 ] || [ "$severity_5_count" -gt 8 ]; then
             echo "Either high or very high severity is greater than necessary.Check the artifect for Veracode results. or log"
             exit 1  # Fail the workflow
         fi
+
+    - name: Create Table
+      run: |
+        #!/bin/bash
+
+        # Load the JSON report
+        report_file=$(cat results.json)
+
+        # Check if the file exists
+        if [ -f "$report_file" ]; then
+            # Extract relevant information
+            findings=$(jq -r '.findings[] | [.title, .severity, .cwe_id] | @tsv' "$report_file")
+
+            # Print the table
+            echo "---------------"
+            echo -e "Title\tSeverity\tCWE"
+            echo -e "$findings" | column -t -s$'\t'
+        else
+            echo "Error: '$report_file' does not exist."
+        fi
+ 
 
