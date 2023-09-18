@@ -24,17 +24,14 @@ jobs:
         severity_4_count=$(echo "$json_data" | jq '.findings[] | select(.severity == 4) | .severity' | wc -l)
         severity_5_count=$(echo "$json_data" | jq '.findings[] | select(.severity == 5) | .severity' | wc -l)
         
-        # Print the counts
-        echo "Severity 4 Count: $severity_4_count"
-        echo "Severity 5 Count: $severity_5_count"
+        # Print the High severity & Very High severity
+        echo "Found $severity_4_count issues of High severity."
+        echo "Found $severity_5_count issues of Very High severity."
         
-        # Check if severity 4 count is greater than 3 and print
-        if [ "$severity_4_count" -gt 3 ]; then
+         # Check if either severity 4 or severity 5 counts are greater than 3 and print
+        if [ "$severity_4_count" -gt 3 ] || [ "$severity_5_count" -gt 3 ]; then
             echo "High severity 4: $severity_4_count"
-        fi
-        
-        # Check if severity 5 count is greater than 3 and print
-        if [ "$severity_5_count" -gt 3 ]; then
             echo "High severity 5: $severity_5_count"
+            exit 1  # Fail the workflow
         fi
 
