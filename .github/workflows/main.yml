@@ -13,9 +13,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # - name: Get results.json file
-    #   run: |
-    #     json_data=$(cat results.json)
+    - name: Get results.json file
+      run: |
+        python json-html-table.py
+
+    - name: Upload HTML Table to Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: output_html 
+          path: test.html # The created file's name is output.html. Name cannot be changed
 
     - name: Run the script
       run: |
