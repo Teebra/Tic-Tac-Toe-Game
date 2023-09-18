@@ -473,7 +473,7 @@
       "title": "spring.datasource.password",
       "issue_id": 1004,
       "gob": "B",
-      "severity": 3,
+      "severity": 5,
       "issue_type_id": "crypto",
       "issue_type": "Use of Hard-coded Password",
       "cwe_id": "259",
