@@ -18,7 +18,7 @@ jobs:
 
     - name: Run the script
       env:
-        RESULTS_JSON: japan.json
+        RESULTS_JSON: results.json
       run: |
         # Load the JSON file
         data=$(cat $RESULTS_JSON)
