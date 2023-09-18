@@ -43,10 +43,6 @@ jobs:
         # severity_4=$(echo "$data" | grep -c '"severity": "4"')
         # severity_5=$(echo "$data" | grep -c '"severity": "5"')
 
-        # Print the counts for severity 4 and severity 5
-        echo "Severity 4 Count: $severity_4"
-        echo "Severity 5 Count: $severity_5"
-
         # Check if severity 4 count is greater than 3 and print
         if [ "$severity_4" -gt "3" ]; then
             echo "High severity: $severity_4"
