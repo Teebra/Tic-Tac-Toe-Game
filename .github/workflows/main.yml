@@ -25,6 +25,10 @@ jobs:
         severity_4=$(grep -E -c '"severity": "4"' results.json || true)
         severity_5=$(grep -E -c '"severity": "5"' results.json || true)
 
+        # Print the counts for severity 4 and severity 5
+        echo "Severity 4 Count: $severity_4"
+        echo "Severity 5 Count: $severity_5"
+
 
         current_directory=$(pwd)
         
