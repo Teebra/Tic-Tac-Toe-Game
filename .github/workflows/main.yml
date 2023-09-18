@@ -20,11 +20,14 @@ jobs:
     - name: Run the script
       run: |
         # Load the JSON file directly
-        data=$(cat results.json)
+        # data=$(cat results.json)
 
-        # Initialize variables for severity 4 and severity 5 counts
-        severity_4=$(echo "$data" | grep -c '"severity": "4"')
-        severity_5=$(echo "$data" | grep -c '"severity": "5"')
+        severity_4=$(grep -i "severity": "4" results.json || true)
+        severity_5=$(grep -i "severity": "5" results.json || true)
+
+        # # Initialize variables for severity 4 and severity 5 counts
+        # severity_4=$(echo "$data" | grep -c '"severity": "4"')
+        # severity_5=$(echo "$data" | grep -c '"severity": "5"')
 
         # Print the counts for severity 4 and severity 5
         echo "Severity 4 Count: $severity_4"
