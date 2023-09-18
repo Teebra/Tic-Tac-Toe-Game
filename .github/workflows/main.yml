@@ -15,7 +15,7 @@ jobs:
 
     - name: Get results.json file
       run: |
-        cat results.json
+        json_data=$(cat results.json)
 
     - name: Run the script
       run: |
