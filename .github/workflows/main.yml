@@ -22,8 +22,9 @@ jobs:
         # Load the JSON file directly
         # data=$(cat results.json)
 
-        severity_4=$(grep -i "severity": "4" results.json || true)
-        severity_5=$(grep -i "severity": "5" results.json || true)
+        severity_4=$(grep -E -c '"severity": "4"' results.json || true)
+        severity_5=$(grep -E -c '"severity": "5"' results.json || true)
+
 
         current_directory=$(pwd)
         
