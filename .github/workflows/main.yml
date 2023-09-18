@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Convert JSON to HTML Table
-        uses: Teebra/JSON-to-HTML-table@main
+        uses: Teebra/JSON-to-HTML-table@V1
         with:
           json-file: jsd/resl.json
 
