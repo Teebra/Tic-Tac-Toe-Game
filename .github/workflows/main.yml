@@ -17,6 +17,8 @@ jobs:
       run: sudo apt-get update && sudo apt-get install jq
 
     - name: Run the script
+      env:
+        RESULTS_JSON: japan.json
       run: |
         # Load the JSON file
         data=$(cat $RESULTS_JSON)
@@ -51,5 +53,3 @@ jobs:
         if [ "$severity_5" -gt 3 ]; then
             echo "High severity: $severity_5"
         fi
-      env:
-        RESULTS_JSON: japan.json
