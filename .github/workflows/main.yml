@@ -60,5 +60,5 @@ jobs:
             if [ "$severity_5" -gt 3 ]; then
                 echo "High severity: $severity_5"
             fi
-          env:
-            RESULTS_JSON: japan.json
+        env:
+          RESULTS_JSON: japan.json
