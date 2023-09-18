@@ -18,7 +18,7 @@ jobs:
 
     - name: Run the script
       run: |
-        # Load the JSON file
+        # Load the JSON file directly
         data=$(cat results.json)
 
         # Initialize variables for severity 4 and severity 5 counts
