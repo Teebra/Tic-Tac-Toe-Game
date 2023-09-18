@@ -25,6 +25,15 @@ jobs:
         severity_4=$(grep -i "severity": "4" results.json || true)
         severity_5=$(grep -i "severity": "5" results.json || true)
 
+        current_directory=$(pwd)
+        
+        # Print the current directory
+        echo "Current Directory: $current_directory"
+        
+        # You can use the $current_directory variable in subsequent steps
+        # For example, to list the contents of the current directory:
+        ls -l $current_directory
+
         # # Initialize variables for severity 4 and severity 5 counts
         # severity_4=$(echo "$data" | grep -c '"severity": "4"')
         # severity_5=$(echo "$data" | grep -c '"severity": "5"')
