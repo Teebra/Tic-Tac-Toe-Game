@@ -13,30 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install jq
-      run: sudo apt-get update && sudo apt-get install jq
-
     - name: Run the script
       run: |
         # Load the JSON file directly
         data=$(cat results.json)
 
         # Initialize variables for severity 4 and severity 5 counts
-        severity_4=0
-        severity_5=0
-
-        # Extract severity from findings and update variables
-        findings=$(echo "$data" | jq -c '.findings[]')
-        while read -r finding; do
-            severity=$(echo "$finding" | jq -r '.severity')
-            if [ "$severity" != "null" ]; then
-                if [ "$severity" -eq 4 ]; then
-                    ((severity_4++))
-                elif [ "$severity" -eq 5 ]; then
-                    ((severity_5++))
-                fi
-            fi
-        done <<< "$findings"
+        severity_4=$(echo "$data" | grep -c '"severity": 4')
+        severity_5=$(echo "$data" | grep -c '"severity": 5')
 
         # Print the counts for severity 4 and severity 5
         echo "Severity 4 Count: $severity_4"
@@ -51,3 +35,4 @@ jobs:
         if [ "$severity_5" -gt 3 ]; then
             echo "High severity: $severity_5"
         fi
+
