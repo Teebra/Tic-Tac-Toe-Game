@@ -27,6 +27,11 @@ jobs:
     - name: Run the script
       run: |
         json_data=$(cat results.json)
+
+        #Set the values for High and Very High severity
+        very_high_severity = 4
+        high_severity = 4
+
         # Extract the severity 4 and severity 5 findings and count them
         severity_4_count=$(echo "$json_data" | jq '.findings[] | select(.severity == 4) | .severity' | wc -l)
         severity_5_count=$(echo "$json_data" | jq '.findings[] | select(.severity == 5) | .severity' | wc -l)
@@ -36,7 +41,7 @@ jobs:
         echo "Found $severity_5_count issues of Very High severity."
         
          # Check if either severity 4 or severity 5 counts are greater than 3 and print
-        if [ "$severity_4_count" -gt 5 ] || [ "$severity_5_count" -gt 3 ]; then
+        if [ "$severity_4_count" -gt "$high_severity" ] || [ "$severity_5_count" -gt "$very_high_severity" ]; then
             echo "Either high or very high severity is greater than necessary.Check the artifect for Veracode results. or log"
             exit 1  # Fail the workflow
         fi
